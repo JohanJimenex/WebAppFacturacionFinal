@@ -1,0 +1,161 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="WebAppFacturacion.Login.Principal" %>
+
+<!DOCTYPE html>
+<html lang="es">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>Sistema de Facturación</title>
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+    <link rel="shortcut icon" href="/Imagenes/Favicon.png" type="image/x-icon" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+        }
+
+        #cabecera {
+            background-color: #FF7800;
+            padding: 1rem;
+            color: white;
+        }
+
+        #barraHorizontal ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+            #barraHorizontal ul li a {
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                padding: 0.5rem 1rem;
+                border-radius: 6px;
+                transition: background 0.3s;
+            }
+
+                #barraHorizontal ul li a:hover {
+                    background-color: #A64E06;
+                }
+
+        #logotipo {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+            #logotipo img {
+                max-height: 80px;
+            }
+
+        #titulo h1 {
+            font-size: 1.8rem;
+            margin: 0.5rem 0 0;
+            color: #ecf0f1;
+        }
+
+        #bajo {
+            display: flex;
+            flex-direction: row;
+            margin: 1rem;
+        }
+
+        #columIzq, #columnDer {
+            width: 20%;
+            padding: 1rem;
+        }
+
+        #columCentro {
+            width: 60%;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #pie {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #ecf0f1;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .lblIdentificacion {
+            font-weight: bold;
+            margin-left: 0.5rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            #bajo {
+                flex-direction: column;
+            }
+
+            #columIzq, #columnDer, #columCentro {
+                width: 100%;
+            }
+
+            #barraHorizontal ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <div id="cabecera">
+                <div id="barraHorizontal">
+                    <ul>
+                        <li><a href="/Login/Default.aspx">Inicio</a></li>
+                        <li><a href="../Mantenimiento/DefaultMantenimiento.aspx">Mantenimiento</a></li>
+                        <li><a href="../Mantenimiento/FrmEmpresa.aspx">Operaciones</a></li>
+                        <li><a href="../Mantenimiento/FrmEmpresa.aspx">Reportes</a></li>
+                        <li><a href="../Mantenimiento/FrmEmpresa.aspx">Seguridad</a></li>
+                        <li><a href="../Mantenimiento/FrmEmpresa.aspx">Utilitarios</a></li>
+                        <li><a href="../Mantenimiento/FrmEmpresa.aspx">Ayuda</a></li>
+                    </ul>
+                </div>
+
+                <div id="logotipo">
+                    <asp:Repeater ID="Repeater1" runat="server">
+                        <ItemTemplate>
+                            <img src='data:image/jpg;base64,<%# Convert.ToBase64String((byte[])DataBinder.Eval(Container.DataItem, "Emp_Logo")) %>' alt="Logo Empresa" />
+                        </ItemTemplate>
+                    </asp:Repeater>
+                    <div id="titulo">
+                        <h1>Sistema de Facturación Electrónica</h1>
+                    </div>
+                </div>
+            </div>
+
+            <div id="bajo">
+                <div id="columIzq">
+                    <asp:ContentPlaceHolder ID="contenidoMenuContextual" runat="server" />
+                </div>
+
+                <div id="columCentro">
+                    <asp:ContentPlaceHolder ID="contenidoPrincipal" runat="server" />
+                </div>
+
+                <div id="columnDer"></div>
+            </div>
+
+            <div id="pie">
+                <span>&copy; 2025 / Versión: 1.0</span><br />
+                <span>Usuario:</span>
+                <asp:Label ID="LblIdentificacion" runat="server" CssClass="lblIdentificacion" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+
+
+ 
